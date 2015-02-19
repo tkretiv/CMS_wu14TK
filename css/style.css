@@ -1,0 +1,198 @@
+.logo {
+	float: left;
+	width: 100px;
+}
+h1, h2, h3 {
+	font-family:  'Scada', sans-serif;
+}
+
+.page-header {
+	font-family: 'Tangerine', cursive;	
+}
+
+#logOutForm {
+  display: none;
+}
+
+#sp_username {
+  font-family: 'Economica', sans-serif;
+    margin: 5px 0 0 0;
+    font-size: 14px;
+}
+
+.adminForm {
+  display:none;
+}
+
+.RNheader {  
+	  font-family: 'Tangerine', cursive;	
+	  font-size: 500%;
+	  color: #00CC99;
+	  text-shadow: 2px 2px #003300;
+     }
+
+ .page-header small {
+	  font-size: 150%;
+	  color: #00CC99;
+	  text-shadow: 0.5px 0.5px #003300;
+	  display:inline-block;
+ }
+
+label {
+	font-family:  'Scada', sans-serif;
+}
+
+.TPict {
+	  display: inline-block;
+	  width: 18vw;
+    margin: 5px 5px;
+    line-height: 100%;
+    float: left;
+    padding: 0 5px;
+  }
+
+  .logForm {
+  	display: inline-block;
+	  width: 18vw;
+	  margin: 5px;
+  }
+
+  .logForm label {
+    font-family: 'Economica', sans-serif;
+    margin: 5px 0 -1px 0;
+    font-size: 14px;
+  }
+
+ .nav-tabs  {
+	font-family: 'Economica', sans-serif;
+	font-size: 12px;
+  margin: 0 auto;
+}
+.nav-tabs  {
+  position:relative;
+  height:40px;
+}
+
+.nav-tabs  ul {
+	list-style: none;
+}
+
+.nav-tabs > ul {
+   width:70vw;
+   background:#00FF99;
+   position:absolute;
+   left:0;
+   height:40px;
+}
+
+.nav-tabs ul li {
+  position:relative;
+  height:40px;
+}
+
+
+.nav-tabs ul .dropdown-menu {
+  position:absolute;
+  white-space:nowrap;
+  z-index: 5;
+top:0;
+  left:100%;
+}
+
+.nav-tabs ul ul ul {
+  top:0;
+  left:100%; 
+}
+
+.nav-tabs > ul > li {
+  float:left;
+  width: 14.28%;
+  vertical-align: middle;
+}
+
+.nav-tabs li a {
+  display:block;
+  text-decoration:none;
+  text-transform:uppercase;
+  color:#000;
+  text-align: center;
+  line-height: 100%;
+}
+
+.nav-tabs li li a {
+  text-transform:none;
+  text-align: left;
+  padding:14px 10px 14px;
+}
+
+.nav-tabs ul ul {
+  display:none;
+}
+
+.nav-tabs li:hover > ul {
+  display:block;
+}
+
+.nav-tabs > ul > li > a {
+  height:30px;
+    border-right:2px solid #00CC99;
+}
+
+.nav-tabs li.active > a {
+  color:#060;
+  background:#00CC99;
+}
+
+.nav-tabs a:hover {
+  color:#060;
+  background:#00CC99;
+}
+
+.nav-tabs li:hover {
+  background:#00CC99;
+}
+
+ .nav-tabs li.active {
+  background:#00CC99;
+}
+
+.nav-tabs li li:hover, .nav-tabs li li.active {
+     background:#00CC33;
+  }
+
+.nav-tabs ul ul {
+  background:#00FF99;
+}
+
+.nav-tabs ul ul ul {
+  background:#00FF99;
+}
+
+/* Display a-tags as inline-blocks (horizontally) */
+nav.breadcrumbs a {
+  display:inline-block;
+  color:#003300;
+  font-size: 14px;
+  font-family: 'Scada', sans-serif;
+}
+
+/* 
+  Insert an arrow between each a-tag
+  (text-decoration:none does not work on :after in IE 
+   soinstead we set a fixed height and overflow hidden)
+*/
+nav.breadcrumbs a:after {
+  content: " » ";
+  padding:0 12px;
+  color:#000;
+  display: inline-block;
+  vertical-align:top;
+  height:18px;
+  overflow:hidden;
+}
+
+/* Do not insert an arrow after the last a-tag */
+nav.breadcrumbs a:last-child:after {
+  content:"";
+  padding:0;
+}
