@@ -20,8 +20,42 @@ h1, h2, h3 {
     font-size: 14px;
 }
 
+.mySidebar {
+  /*display: inline-block;*/
+  left: 0;
+  top: 0;
+  /*height: 100%;*/
+  /*width: 30%;*/
+  border-left: 0.5px dotted #7A7;
+  float: left;
+  padding-left: 3%;
+}
+
 .adminForm {
+  margin: 0;
   display:none;
+}
+
+.adform {
+  /*display: inline-block;*/
+  top: 0;
+  /*height: 100%;*/
+  width: 50%;
+  float: left;
+  margin-left: 2%;
+}
+
+.table {
+  font-size: 80%;
+}
+
+.text-muted {
+  font-family: 'Economica', sans-serif;
+    margin: 15px auto;
+    padding: 10px;
+    font-size: 14px;
+    color: #777;
+    border-top: 1px dotted #7A7;
 }
 
 .RNheader {  

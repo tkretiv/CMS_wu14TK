@@ -13,6 +13,7 @@
       <script src="js/base.js"></script>
       <script src="js/menu.js"></script>
       <script src="js/login.js"></script>
+      <script src="ckeditor/ckeditor.js"></script>
 
 </head>
 <body>
@@ -23,7 +24,7 @@
   			<h1 class="RNheader" > Rena natura </h1> <small> Bli Ren till Jul!</small>
 		</div>
   <div class="col-md-4">
-      <form class= "logForm" id="loginForm">
+      <form class="logForm" id="loginForm">
         <!-- <span class="input-group-addon" id="sizing-addon3">Username</span> -->
           <label for="username">User name</label>
                 <input type="text" id ="username" class="form-control" placeholder="Enter email..">
@@ -36,6 +37,13 @@
           <span class="label label-default" id="sp_username">Logged in as </span>
                    
           <button type="submit" class="btn btn-success">Logout</button>                
+      </form>
+      <form class="navbarSearchForm navbar-form navbar-right">
+                <div class="form-group">
+                  <input type="text" class="form-control" placeholder="search">
+                </div>
+                <!-- placing button outside form group separates it from the group -->
+                <button type="submit" class="btn btn-success">Search</button>
       </form>
   </div>
   </section>  
@@ -61,10 +69,41 @@
     <section id="mainpage">
 
     </section>
+
+      
+
     <section class="row adminForm">
-         <form  id="admin-form" class="form-horizontal col-xs-12 col-sm-10 col-md-8 col-lg-6 col-xs-offset-0 col-sm-offset-1 col-md-offset-2 col-lg-offset-3">
-          <div class="form-group">
-            <h2> Administration pages:</h2>
+      <!-- <div row-same-height> -->
+      
+      <section id="content-list" class="mySidebar">
+
+         <!-- class="col-xs-4 col-sm-4 col-md-4 col-lg-2" -->
+          <!-- a bootstrap panel with heading and a table -->
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">All Pages</h3>
+            </div> 
+            <!-- listing of content using a table -->
+            <!-- .table is a bootstrap class -->
+            <table class="table">
+              <tr class="pageTableHeads">
+                <!-- traditional table heads -->
+                <th>pid:</th>
+                <th>Title:</th>
+                <th>Author:</th>
+                <th>Created:</th>
+                <th>Actions:</th>
+              </tr>
+            </table>
+          </div>
+        </section>
+        
+
+        <section class="adform">
+         <form  id="admin-form" >
+           <!-- class="form-horizontal col-xs-8 col-sm-8 col-md-8 col-lg-10 col-xs-offset-0 col-sm-offset-1 col-md-offset-2 col-lg-offset-3" -->
+          <div class="panel-heading">
+            <h2 class="panel-title"> Administration pages:</h2>
           </div>
           <div class="form-group">
               <label for="page_title">Page Title</label>
@@ -107,12 +146,13 @@
           <div class="form-group">
             <button type="submit" class="btn btn-success">Save</button>
           </div>
-      </form> 
+      </form>
+    </section>
     </section>
 	</main>
   
   <footer>
-    <section class="fotContact">
+    <section class="footer fotContact">
       
     </section>
  </footer>

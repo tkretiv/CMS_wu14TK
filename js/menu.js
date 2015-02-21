@@ -52,7 +52,7 @@ function createAdminMenuSelect(data) {
   //add a top option with mlid null to our select right away
   var topOption = $('<option value="">Top</option>');
    
-  console.log("AdminMenu");
+  // console.log("AdminMenu");
 
 topOption.data("menuItem", {mid: null, menu: "Basemenu"});
   select_html.append(topOption);

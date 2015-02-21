@@ -5,12 +5,15 @@ $(function() {
 
 pushPopListeners();
 
+getContactInfo();
+
+
 $("#admin-form").submit(function() {
     //prepare adminFormData to be sent with AJAX
      console.log("adminFormData  1");
     var adminFormData = {
       ":title" : $(this).find("#page_title").val(),
-      ":body" : $(this).find("#page_body").val(),
+      ":body" : CKEDITOR.instances.page_body.getData(),
       ":path" : $(this).find("#page_url").val()
       //":user_id" : 1 //this has been moved to PHP
     };
@@ -70,6 +73,7 @@ function insertNewPage(adminFormData) {
       //on success, goTo() the contentList url
      // goTo("content-list");
      console.log("insertNewPage success ");
+     goTo(adminFormData[":path"]);
     },
     error: function(data) {
       console.log("insertNewPage error: ", data);
@@ -90,7 +94,7 @@ function getMenuLinks(menu_name, successFunction) {
     success: function(data) {
        //on success, goTo() the contentList url
       // goTo("content-list");
-      console.log("MenuLinks success "+successFunction);
+      console.log("MenuLinks success ");
       successFunction(data);
      },
     error: function (data) {
@@ -98,4 +102,24 @@ function getMenuLinks(menu_name, successFunction) {
             }
 
   });
+}
+
+function showContactInfo(data) {
+  
+  $(".fotContact").html("");
+
+  var fotHtml = $('<div class="container text-muted"></div>');
+
+  // console.log("CONTACT", data);
+    // fotHtml.append('<p class="text-muted"> ');
+    fotHtml.append("<u>Vår adress: </u>"+data[0]["Adress"]);
+
+    //append author and date information
+      fotHtml.append("<u> Phone: </u>"+data[0]["phone"]);
+      fotHtml.append("<br><u>Kontakt person:</u> "+data[0]["fname"]+" "+data[0]["lname"]+" "+data[0]["email"]);
+
+   // fotHtml.append('</p> ');
+  $(".fotContact").html(fotHtml);
+
+
 }

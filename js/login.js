@@ -7,11 +7,7 @@ $(function() {
       ":pass": $("#password").val()
     };
               
-    $("#logOutForm").show();
     logIn(loginData);
-               
-    $("#sp_username").text("Logged in as "+ loginData[":email"]);
-    $("#loginForm").hide();
                
     return false;
   });
@@ -58,8 +54,6 @@ function logOut() {
       logout: 1
     },
     success: function(data) {
-       $("#logOutForm").hide();
-    $("#loginForm").show();
       goTo("home.html");
     },
     error: function(data) {
@@ -70,7 +64,7 @@ function logOut() {
 
 function loginResult(data) {
 	console.log("go to Admin, plzzz");
-goTo("admin.html");
+  goTo("admin.html");
 }
 
 function checkIfLoggedIn(goToUrl) {

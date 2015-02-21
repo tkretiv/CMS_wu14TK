@@ -31,12 +31,12 @@ public function isLoggedIn() {
 }
 
 public function logIn($login_data) {
-    $sql="SELECT uid FROM users WHERE email=:email && pass=:pass;";
+    $sql="SELECT uid, email FROM users WHERE email=:email && pass=:pass;";
     $result = $this->query($sql,$login_data);
  
     if (count($result)>0) {
       $result = $result[0];
-      $_SESSION["loggedUser"] =array("user_id"=>$result['uid']);
+      $_SESSION["loggedUser"] =array("user_id"=>$result['uid'], "email" => $result["email"]);
       // echo("Trying to store this:");
       // var_dump(array("user_id"=>$result['uid']));
       // echo('<br>');

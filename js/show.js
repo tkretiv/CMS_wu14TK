@@ -7,12 +7,22 @@
  */
 
 //function to show/hide sections
-function showPage(pageUrl) {
+function showPage(pageUrl, loggedIn) {
   //if no pageUrl was recieved (or home was recieved),
   //show the "front page"
   if (!pageUrl || pageUrl == "home") {
     pageUrl = "home.html";
   }
+
+  $(".logForm").hide();
+  if (loggedIn) {
+    $("#logOutForm").show();
+    $("#sp_username").text("Logged in as "+ loggedIn["email"]);
+  } else {
+    $("#loginForm").show();
+  }
+
+  console.log("showPage: ", pageUrl, loggedIn);
 
   //get main menu links
   //now also sending the createMainMenu() function as a parameter
@@ -24,9 +34,9 @@ function showPage(pageUrl) {
   // $(".navbarSearchForm").hide();
 
   //if needed get data using AJAX
-  // if (pageUrl == "content-list") {
-  //   //get admin content list
-  //   getPages();
+ // if (pageUrl == "content-list" && isLoggedIn) {
+ //    //get admin content list
+ //    getPages();
 
   //   //and show the admin content-list search box
   //   $(".navbarSearchForm").fadeIn(500);
@@ -42,7 +52,21 @@ function showPage(pageUrl) {
   //   //else try to find a page for the url using 
   //   //getCurrentPage() from ajax.js 
   console.log("show page: ",pageUrl);
+    
+
+  if (pageUrl !== "admin.html" || !loggedIn)
+   {
+    $("#mainpage").show();
     getCurrentPage(pageUrl);
+    $(".adminForm").hide();
+    }
+  else {
+    $(".adminForm").show();
+    getPages();
+    CKEDITOR.replace( 'page_body' );
+    $("#mainpage").hide();
+  }
+
 
   //   //once we have sent our ajax request for page data,
   //   //change pageUrl to the correct section id so that our
@@ -68,18 +92,8 @@ function goTo(href) {
   // Show a "page" in a section with the id corresponding
   // to the link's href value
   console.log("href",href);
-  if (href !== "admin.html")
-   {
+  checkIfLoggedIn(href);
 
-    $("#mainpage").show();
-     checkIfLoggedIn(href);
-    $(".adminForm").hide();
-    }
-  else {
-    $(".adminForm").show();
-    $("#mainpage").hide();
-  }
- 
   // Add the current "state/page" to our history of visited pages
   history.pushState(null,null,href);
 }

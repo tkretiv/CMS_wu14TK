@@ -125,14 +125,14 @@ public function query($sql, $params =array()) {
 
 
   public function getAllPages() {
-    $sql = "SELECT pages.pageid, pages.title, pages.body, pages.created, CONCAT(users.fname, ' ', users.lname) as author FROM pages, users";
+    $sql = "SELECT p.pageid pid, p.title, p.body, p.created, CONCAT(u.fname, ' ', u.lname) as author FROM pages p, users u where p.user_id=u.uid";
     return $this->query($sql);
   }
 
 
   public function searchForPages($search_param) {
     $search_param = array(":search_param" => "%".$search_param."%");
-    $sql = "SELECT pages.pageid, pages.title, pages.body, pages.created, CONCAT(users.fname, ' ', users.lname) as author FROM pages, users WHERE pages.title LIKE :search_param";
+    $sql = "SELECT p.pageid pid, p.title, p.body, p.created, CONCAT(u.fname, ' ', u.lname) as author FROM pages p, users u WHERE p.title LIKE :search_param and p.user_id=u.uid";
     return $this->query($sql, $search_param);
   }
 

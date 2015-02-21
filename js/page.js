@@ -41,10 +41,13 @@ function showPageContent(pageData) {
 }
 
 function getContactInfo() {
+  console.log('Contact info ...');
   $.ajax({
     url: "php/contact.php",
     dataType: "json",
-    type: "get",
+    data: {
+      contactInfo: 1
+    },
     success: function(data) {
       showContactInfo(data);
       console.log('Contact info is loaded');
@@ -53,4 +56,66 @@ function getContactInfo() {
       console.log("getContactInfo error: ", data.responseText);
     }
   });
+}
+
+$(".navbarSearchForm").submit(function() {
+    //get search input field value
+    var search_param = $(this).find('input[type="text"]').val();
+    //and get pages with matching titles
+    getPages(search_param);
+
+    //return false to prevent page reload on form submit
+    return false;
+  });
+
+//function to getPages.
+function getPages(search_param) {
+  $.ajax({
+    url: "php/get_page.php",
+    type: "get",
+    dataType: "json",
+    data: {
+      //if search_param is NULL (undefined), the if-statement 
+      //in get_content.php will be false
+      "search_param": search_param
+    },
+    //on success, execute listAllPages function
+    //listAllPages has been moved to helpers.js
+    success: listAllPages,
+    error: function(data) {
+      console.log("getPages error: ", data.responseText);
+    }
+  });
+}
+
+//function to list pages in admin content list
+function listAllPages(data) {
+  console.log("listAllPages success: ", data);
+  //remove all table rows in #content-list that does not 
+  //have the .pageTableHeads class
+  $("#content-list table tr").not(".pageTableHeads").remove();
+
+  //and build new table rows from data
+  for (var i = 0; i < data.length; i++) {
+    //create new table row
+    var newTableRow = $("<tr/>");
+    //append important page data to newTableRow
+    newTableRow.append('<td><span class="badge">'+data[i].pid+"</span></td>");
+    newTableRow.append('<td><strong>'+data[i].title+"</strong></td>");
+    newTableRow.append('<td>'+data[i].author+"</td>");
+    newTableRow.append('<td>'+data[i].created+"</td>");
+
+    //add page data to each <tr> representing it
+    newTableRow.data("page", data[i]);
+
+    //add admin edit & trash buttons to the #content-list
+    var adminButtons = $('<td/>');
+    adminButtons.append('<div class="btn-group btn-group-xs"/>');
+    // adminButtons.find(".btn-group").append('<button type="button" class="btn btn-default editBtn" title="Edit"><span class="glyphicon glyphicon-pencil"></span></button>'); //TBA
+    adminButtons.find(".btn-group").append('<button type="button" class="btn btn-default trashBtn" title="Trash"><span class="glyphicon glyphicon-trash"></span></button>');
+    newTableRow.append(adminButtons);
+
+    //then append newTableRow to the #content-list table
+    $("#content-list table").append(newTableRow);
+  }
 }
