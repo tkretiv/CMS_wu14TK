@@ -128,18 +128,18 @@ public function deletePage($delete_pid) {
     //needed for menu link delete
      //then find the menu_link of the page, 
     //needed for menu link delete (update children)
-    // $sql2 = "SELECT mid, pid FROM menu_links WHERE pageid = :pid";
-    // // $menu_link_data1 = array(":path" => $url_alias);
-    // $menu_link = $this->query($sql1, $delete_pid);
-    // $menu_link = $menu_link[0];
+    $sql2 = "SELECT mid, pid FROM menu_links WHERE pageid = :pid";
+    // $menu_link_data1 = array(":path" => $url_alias);
+    $menu_link = $this->query($sql2, $delete_pid);
+    $menu_link = $menu_link[0];
 
-    // //update menu_link children before deleting parent
-    // $sql3 = "UPDATE menu_links SET pid=:new_pid WHERE pid=:old_pid;";
-    // $menu_link_data2 = array(
-    //   ":new_pid" => $menu_link["pid"],
-    //   ":old_pid" => $menu_link["mid"],
-    // );
-    // $this->query($sql3, $menu_link_data2);
+    //update menu_link children before deleting parent
+    $sql3 = "UPDATE menu_links SET pid=:new_pid WHERE pid=:old_pid;";
+    $menu_link_data2 = array(
+      ":new_pid" => $menu_link["pid"],
+      ":old_pid" => $menu_link["mid"],
+    );
+    $this->query($sql3, $menu_link_data2);
 
     //now start deleting, respecting foreign key contraints
     //remove any menu_links to this page url_alias
