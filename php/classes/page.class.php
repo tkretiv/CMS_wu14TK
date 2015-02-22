@@ -123,6 +123,36 @@ public function query($sql, $params =array()) {
     return true;
   }
 
+public function deletePage($delete_pid) {
+    //first find the url_alias of the page, 
+    //needed for menu link delete
+     //then find the menu_link of the page, 
+    //needed for menu link delete (update children)
+    // $sql2 = "SELECT mid, pid FROM menu_links WHERE pageid = :pid";
+    // // $menu_link_data1 = array(":path" => $url_alias);
+    // $menu_link = $this->query($sql1, $delete_pid);
+    // $menu_link = $menu_link[0];
+
+    // //update menu_link children before deleting parent
+    // $sql3 = "UPDATE menu_links SET pid=:new_pid WHERE pid=:old_pid;";
+    // $menu_link_data2 = array(
+    //   ":new_pid" => $menu_link["pid"],
+    //   ":old_pid" => $menu_link["mid"],
+    // );
+    // $this->query($sql3, $menu_link_data2);
+
+    //now start deleting, respecting foreign key contraints
+    //remove any menu_links to this page url_alias
+    $del_sql1 = "DELETE FROM menu_links WHERE pageid = :pid;";
+      $this->query($del_sql1, $delete_pid);
+    
+    //and finally, remove this page (no more foreign key constraints)
+    $del_sql3 = "DELETE FROM pages WHERE pageid = :pid;";
+    $this->query($del_sql3, $delete_pid);
+
+    return true;
+  }
+
 
   public function getAllPages() {
     $sql = "SELECT p.pageid pid, p.title, p.body, p.created, CONCAT(u.fname, ' ', u.lname) as author FROM pages p, users u where p.user_id=u.uid";

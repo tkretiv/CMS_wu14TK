@@ -119,3 +119,25 @@ function listAllPages(data) {
     $("#content-list table").append(newTableRow);
   }
 }
+
+
+function deletePage(pid) {
+  console.log("delete pid: ", pid);
+  $.ajax({
+    url: "php/get_page.php",
+    type: "get",
+    dataType: "json",
+    data: { "delete_pid": {
+        "pid": pid
+      }
+    },
+    //on success
+    success: function(data) {
+      console.log("deletePage success: ", data);
+      goTo("admin.html");
+    },
+    error: function(data) {
+      console.log("deletePage error: ", data.responseText);
+    }
+  });
+}

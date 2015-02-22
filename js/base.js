@@ -54,6 +54,16 @@ $("#admin-form").submit(function() {
     $(".addToMenu #menu_title").attr("required", $(this).is(":checked"));
   });
 
+ $("body").on("click", "#content-list table .trashBtn", function() {
+    //trash btn clickhandler
+    var pageData = $(this).parents("tr").data("page");
+    console.log("pageData: ", pageData);
+    
+    if(confirm('Are you sure you want to permanently delete the page: "'+pageData.title+'" and all of its data?')) {
+      deletePage(pageData.pid);
+    }
+  });
+
 });
 
 
