@@ -1,8 +1,6 @@
 
 $(function() {
 
-// checkIfLoggedIn("hom e.html");
-
 pushPopListeners();
 
 getContactInfo();
@@ -15,7 +13,6 @@ $("#admin-form").submit(function() {
       ":title" : $(this).find("#page_title").val(),
       ":body" : CKEDITOR.instances.page_body.getData(),
       ":path" : $(this).find("#page_url").val()
-      //":user_id" : 1 //this has been moved to PHP
     };
     //if the user has asked to add page to menu
      if ($('.addToMenu input[type="checkbox"]').is(":checked")) {
@@ -33,19 +30,14 @@ $("#admin-form").submit(function() {
     insertNewPage(adminFormData);
 
     //empty the form once we're done with the information in it
-    this.reset(); //.reset() is a JS function, NOT a jQuery function... :D
+    this.reset();
 
     //return false to prevent page reload on form submit
     return false;
   });
 
  $('.addToMenu input[type="checkbox"]').click(function() {
-    // if ($(this).is(":checked")) {
-
-    //   $("#admin-form .menuLinkFields").show();
-    // } else {
-    //   $("#admin-form .menuLinkFields").hide();
-    // }
+    
 
     console.log("click checkBox");
     getMenuLinks("Basemenu", createAdminMenuSelect);
@@ -64,6 +56,16 @@ $("#admin-form").submit(function() {
     }
   });
 
+  $(".navbarSearchForm").submit(function() {
+    //get search input field value
+    var search_param = $(this).find('input[type="text"]').val();
+    //and get pages with matching titles
+    getPages(search_param);
+
+    //return false to prevent page reload on form submit
+    return false;
+  });
+
 });
 
 
@@ -75,13 +77,10 @@ function insertNewPage(adminFormData) {
     type: "post",
     dataType: "json",
     data: {
-      //this request must have data to get through the 
-      //if-statement in save_content.php
       "page_data" : adminFormData
     },
     success: function(data) {
-      //on success, goTo() the contentList url
-     // goTo("content-list");
+      
      console.log("insertNewPage success ");
      goTo(adminFormData[":path"]);
     },
@@ -100,10 +99,8 @@ function getMenuLinks(menu_name, successFunction) {
     data: {
       "menu_name" : "Basemenu"
     },
-   //  createAdminMenuSelect,
+   
     success: function(data) {
-       //on success, goTo() the contentList url
-      // goTo("content-list");
       console.log("MenuLinks success ");
       successFunction(data);
      },
@@ -120,16 +117,13 @@ function showContactInfo(data) {
 
   var fotHtml = $('<div class="container text-muted"></div>');
 
-  // console.log("CONTACT", data);
-    // fotHtml.append('<p class="text-muted"> ');
     fotHtml.append("<u>Vår adress: </u>"+data[0]["Adress"]);
 
     //append author and date information
       fotHtml.append("<u> Phone: </u>"+data[0]["phone"]);
       fotHtml.append("<br><u>Kontakt person:</u> "+data[0]["fname"]+" "+data[0]["lname"]+" "+data[0]["email"]);
 
-   // fotHtml.append('</p> ');
-  $(".fotContact").html(fotHtml);
+     $(".fotContact").html(fotHtml);
 
 
 }

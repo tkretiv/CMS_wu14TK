@@ -14,8 +14,6 @@ public function __construct($host,$dbname,$user,$pass) {
                     $_SESSION["loggedUser"] :
                     false;
 
-          // var_dump($_SESSION["loggedUser"]);
-          // die("hej");
   parent::__construct($host,$dbname,$user,$pass);
 }
 
@@ -167,20 +165,5 @@ public function deletePage($delete_pid) {
   }
 
 
-  /**
-   * Menus
-   */
-
-  public function getMenuNames() {
-    $sql = "SELECT * FROM menus";
-    return $this->query($sql);
-  }
-
-
-  public function getMenuLinks($menu_name) {
-    $menu_name = array(":menu_name" => $menu_name);
-    $sql = "SELECT * FROM menu_links WHERE menu = :menu_name";
-    
-    return $this->query($sql, $menu_name);
-  }
+  
 }

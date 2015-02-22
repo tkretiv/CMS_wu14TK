@@ -28,10 +28,7 @@ function logIn(loginData) {
     data: {
       "login" : loginData
     },
-   //  createAdminMenuSelect,
     success: function(data) {
-       //on success, goTo() the contentList url
-      // goTo("content-list");
       console.log("Login success ",data);
        if (data) {
           console.log("go to Admin, plzzz");
@@ -72,11 +69,9 @@ function checkIfLoggedIn(goToUrl) {
     url: "php/login.php",
     type: "post",
     dataType: "json",
-    //on success, execute logInUser function
-    //logInUser has been moved to helpers.js
     success: function(data) {
       console.log("checkIfLoggedIn success: ", data);
-      //once results are in, execute showPage() in pushPop.js
+  
       showPage(goToUrl, data);
     },
     error: function(data) {

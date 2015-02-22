@@ -21,11 +21,8 @@ h1, h2, h3 {
 }
 
 .mySidebar {
-  /*display: inline-block;*/
   left: 0;
   top: 0;
-  /*height: 100%;*/
-  /*width: 30%;*/
   border-left: 0.5px dotted #7A7;
   float: left;
   padding-left: 3%;
@@ -37,9 +34,7 @@ h1, h2, h3 {
 }
 
 .adform {
-  /*display: inline-block;*/
   top: 0;
-  /*height: 100%;*/
   width: 50%;
   float: left;
   margin-left: 2%;
@@ -191,18 +186,18 @@ top:0;
 }
 
 .nav-tabs li li:hover, .nav-tabs li li.active {
-     background:#00CC33;
+     background:#00CC99;
   }
 
 .nav-tabs ul ul {
-  background:#00FF99;
+  background:#00CC99;
 }
 
 .nav-tabs ul ul ul {
-  background:#00FF99;
+  background:#00CC99;
 }
 
-/* Display a-tags as inline-blocks (horizontally) */
+
 nav.breadcrumbs a {
   display:inline-block;
   color:#003300;
@@ -210,11 +205,6 @@ nav.breadcrumbs a {
   font-family: 'Scada', sans-serif;
 }
 
-/* 
-  Insert an arrow between each a-tag
-  (text-decoration:none does not work on :after in IE 
-   soinstead we set a fixed height and overflow hidden)
-*/
 nav.breadcrumbs a:after {
   content: " » ";
   padding:0 12px;
@@ -225,7 +215,7 @@ nav.breadcrumbs a:after {
   overflow:hidden;
 }
 
-/* Do not insert an arrow after the last a-tag */
+
 nav.breadcrumbs a:last-child:after {
   content:"";
   padding:0;

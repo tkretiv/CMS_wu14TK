@@ -27,8 +27,6 @@ function createMenuTree(menuData) {
     }
   });
 
-
-  //add children to all menu_items using the hash reference
   for(var i in hash){
     item = hash[i];
     //if no plid, skip this iteration of the loop
@@ -43,7 +41,6 @@ function createMenuTree(menuData) {
 
 function createAdminMenuSelect(data) {
   
-  //createMenuTree() has been moved to helpers.js
   var menuTree = createMenuTree(data);
 
   //our #admin-form select element
@@ -52,8 +49,6 @@ function createAdminMenuSelect(data) {
   //add a top option with mlid null to our select right away
   var topOption = $('<option value="">Top</option>');
    
-  // console.log("AdminMenu");
-
 topOption.data("menuItem", {mid: null, menu: "Basemenu"});
   select_html.append(topOption);
 
@@ -96,13 +91,10 @@ function buildSelectOptions(select_html, menuItems, level) {
 
 
  function createMainMenu(data) {
-  //createMenuTree() has been moved to helpers.js
   var menuTree = createMenuTree(data);
   console.log("menuTree",menuTree);
   //create mainMenuHtml
   var mainMenuHtml = $('<ul class="nav nav-tabs"/>');
-  //and append all menuLinks (and their submenus) 
-  //recursively as <li> tags
   mainMenuHtml = buildMainMenu(mainMenuHtml, menuTree);
 
   //and finally replace .navbar menu with new html
@@ -118,14 +110,8 @@ function buildMainMenu(menuHtml, menuItems) {
     //create a new <li> tag
     var menuLink;
     if (menuItems[j].children.length < 1) {
-      //if this item has no children, only a make menuLink 
-      //("<li><a></a></li>")
       menuLink = $('<li><a href="'+menuItems[j].path+'">'+menuItems[j].title+'</a></li>');
     } else {
-      //if this item has children, make a menuLink and a submenu 
-      //("<li><a></a><ul></ul></li>")
-
-      //first add <li><a></a></li>
       menuLink = $('<li class="dropdown"><a href="'+menuItems[j].path+'">'+menuItems[j].title+'</a></li>');
       
       //then create submenu <ul></ul>

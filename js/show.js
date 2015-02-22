@@ -1,12 +1,6 @@
 
 
 
-/**
- * Navigation & history push/pop-state
- *
- */
-
-//function to show/hide sections
 function showPage(pageUrl, loggedIn) {
   //if no pageUrl was recieved (or home was recieved),
   //show the "front page"
@@ -24,35 +18,11 @@ function showPage(pageUrl, loggedIn) {
 
   console.log("showPage: ", pageUrl, loggedIn);
 
-  //get main menu links
-  //now also sending the createMainMenu() function as a parameter
   getMenuLinks("Basemenu", createMainMenu);
 
-
-
-  //always initially hide the admin content-list search box
-  // $(".navbarSearchForm").hide();
-
-  //if needed get data using AJAX
- // if (pageUrl == "content-list" && isLoggedIn) {
- //    //get admin content list
- //    getPages();
-
-  //   //and show the admin content-list search box
-  //   $(".navbarSearchForm").fadeIn(500);
-  // } else if (pageUrl == "admin-form") {
-  //   //hide "Add to menu" fields initially
-  //   $("#admin-form .menuLinkFields").hide();
-
-  //   //get admin "Add to menu" select list
-  //   //now also sending the createAdminMenuSelect() function 
-  //   //from menus.js as a parameter to getMenuLinks.
-  //   getMenuLinks("menu-main-menu", createAdminMenuSelect);
-  // } else {
-  //   //else try to find a page for the url using 
-  //   //getCurrentPage() from ajax.js 
-  console.log("show page: ",pageUrl);
-    
+  $(".navbarSearchForm").hide();
+  $("#mainpage").hide();
+  $(".adminForm").hide();
 
   if (pageUrl !== "admin.html" || !loggedIn)
    {
@@ -61,36 +31,22 @@ function showPage(pageUrl, loggedIn) {
     $(".adminForm").hide();
     }
   else {
+    $("#mainpage").hide();
     $(".adminForm").show();
     getPages();
-    CKEDITOR.replace( 'page_body' );
-    $("#mainpage").hide();
+    $(".navbarSearchForm").show();
+    
+    CKEDITOR.replace( 'page_body', {
+                      language: 'sv',
+                      uiColor: '#4cae4c'
+                      });
+    
   }
 
-
-  //   //once we have sent our ajax request for page data,
-  //   //change pageUrl to the correct section id so that our
-  //   //section shows
-  //   pageUrl = "page";
-  // }
-
-  //hide all sections in main .row except section.mySidebar
-  // $("main .row").children().not(".mySidebar").hide();
-
-  // //then show the requested section
-  // $('section#'+pageUrl).fadeIn(500);
-
-  //remove .active from all li tags that are inside a ul
-  //with the class .nav
- console.log('a 1 [href="'+pageUrl+'"]');
- 
 }
 
 
-//go to "page" function
 function goTo(href) {
-  // Show a "page" in a section with the id corresponding
-  // to the link's href value
   console.log("href",href);
   checkIfLoggedIn(href);
 
@@ -113,12 +69,11 @@ function pushPopListeners() {
     }
 
     //prevent "empty" urls from affecting browsing
-    if ($(this).attr("href") && $(this).attr("href") !== "#") {
+    // and CKEditor service commands
+    if ($(this).attr("href") && $(this).attr("href") !== "#" && $(this).attr("href").indexOf(":void") <0) {
       goTo($(this).attr("href"));
     }
   
-
- 
     event.preventDefault();
   });
 
